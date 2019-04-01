@@ -1,0 +1,48 @@
+<head>{% load static %}<title ></title></head>
+
+<body>
+<form id="checkout-form" action="" type="" method="POST">
+    <!-- merchant's input elements, as many as required -->
+    <input type="text" name="first-name" id="fn">
+    <input type="text" name="last-name" id="ln">
+    <input type="text" name="email" id="em">
+    <input type="text" name="address" id="add">
+
+    <!-- card related input elements: -->
+    <input type="text" data-paylane="cc-number" name="cc" id="cc">
+    <input type="text" data-paylane="cc-cvv" name="cvv" id="cvv">
+    <input type="text" data-paylane="cc-name-on-card" name="name" id="name">
+
+    <!-- please note that the expiry month/year elements can be simple inputs -->
+        <input type="text" data-paylane="cc-expiry-month" name="month" id="m">
+        <input type="text" data-paylane="cc-expiry-year" name="year" id="y">
+    <!-- or they can be select nodes -->
+
+    <input type="submit" value="submit" name="submit">
+</form>
+
+<script src="{% static 'paylane/paylane.js' %}"></script>
+<script>
+    try
+    {
+        var client = new PayLaneClient({
+             publicApiKey: '2cb1d8c634b7501099d8cf78e4efa64823564fa3',
+            paymentForm: 'checkout-form',
+            callbackHandler: function(token)
+            {
+                console.log(token);
+{#                window.location.href = "/api/paylane/invalid_token/?invalid_code="+token#}
+
+            }
+
+        });
+
+    }
+    catch (e) {
+        console.log(e); // exceptions are fatal
+
+    }
+
+</script>
+</body>
+</html>

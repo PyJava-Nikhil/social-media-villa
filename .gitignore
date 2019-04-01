@@ -1,0 +1,8 @@
+.idea/
+*.pyc
+*__pycache__/
+media/
+static/
+inspectionProfiles/
+*.xml
+celerybeat-schedule
